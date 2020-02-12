@@ -202,7 +202,11 @@ function getCarInfoById(inventory, num /* code here */) {
  */
 function sortCarInventory(inventory /* code here */) {
   /* code here */
-  return inventory.car_model.sort();
+  const sortedByModel = [];
+  for (i = 0; i < inventory.length; i++) {
+    sortedByModel.push(inventory[i].car_model);
+  }
+  return sortedByModel.sort();
 }
 
 /**
