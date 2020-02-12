@@ -205,8 +205,9 @@ function sortCarInventory(inventory /* code here */) {
   const sortedByModel = [];
   for (i = 0; i < inventory.length; i++) {
     sortedByModel.push(inventory[i].car_model);
+    sortedByModel.sort();
   }
-  return sortedByModel.sort();
+  return sortedByModel;
 }
 
 /**
@@ -300,7 +301,7 @@ function getGermanCars(inventory /* code here */) {
  */
 const sum = (a, b) => a + b; // code here!
 const addFive = num => num + 5; // code here!
-const argTimesTwo = () => num * 2; // code here!
+const argTimesTwo = num => num * 2; // code here!
 
 /**
  * ### Challenge `carMaker`
@@ -315,18 +316,16 @@ const argTimesTwo = () => num * 2; // code here!
  *         (1) causes the odometer in the object to be increased by the distance,
  *         (2) returns the updated value of the `odometer`.
  */
-function carMaker(/* code here */) {
+function carMaker(num /* code here */) {
   /* code here */
-  const carMaker = function(num) {
-    const odometerReader = {
-      odometer: num,
-      drive: function(distance) {
-        let updatedOdometer = num + distance;
-        return updatedOdometer;
-      }
-    };
-    return odometerReader;
+  const odometerReader = {
+    odometer: num,
+    drive: function(distance) {
+      const updatedOdometer = odometerReader.odometer + distance;
+      return updatedOdometer;
+    }
   };
+  return odometerReader;
 }
 
 /// ////// END OF CHALLENGE /////////
