@@ -185,7 +185,7 @@ function getLastCarInfo(inventory /* code here */) {
  */
 function getCarInfoById(inventory, num /* code here */) {
   /* code here */
-  for (i = 0; i < inventory.length; i++) {
+  for (let i = 0; i < inventory.length; i++) {
     if (inventory[i].id === num) {
       return `This is a ${inventory[i].car_make} ${inventory[i].car_model}`;
     }
@@ -200,14 +200,17 @@ function getCarInfoById(inventory, num /* code here */) {
  *     (1) an array which is an inventory of cars like the one inside /data/inventory.js.
  * sortCarInventory returns an inventory that is sorted by car_model, ascending [A-Z].
  */
-function sortCarInventory(inventory /* code here */) {
+function sortCarInventory(inventory) {
+  inventory.sort((a, b) => {
+    if (a.car_model < b.car_model) {
+      return -1;
+    }
+    if (a.car_model > b.car_model) {
+      return +1;
+    }
+  });
+  return inventory;
   /* code here */
-  const sortedByModel = [];
-  for (i = 0; i < inventory.length; i++) {
-    sortedByModel.push(inventory[i].car_model);
-    sortedByModel.sort();
-  }
-  return sortedByModel;
 }
 
 /**
@@ -222,7 +225,7 @@ function sortCarInventory(inventory /* code here */) {
 function getModelYears(inventory /* code here */) {
   /* code here */
   const sortedByYear = [];
-  for (i = 0; i < inventory.length; i++) {
+  for (let i = 0; i < inventory.length; i++) {
     sortedByYear.push(inventory[i].car_year);
   }
   return sortedByYear;
@@ -243,7 +246,7 @@ function getModelYears(inventory /* code here */) {
 function getOlderCars(inventory, max /* code here */) {
   /* code here */
   const olderCars = [];
-  for (i = 0; i < inventory.length; i++) {
+  for (let i = 0; i < inventory.length; i++) {
     if (inventory[i].car_year <= max) {
       olderCars.push(inventory[i]);
     }
@@ -265,8 +268,8 @@ function getOlderCars(inventory, max /* code here */) {
  */
 function getGermanCars(inventory /* code here */) {
   /* code here */
-  germanCars = [];
-  for (i = 0; i < inventory.length; i++) {
+  const germanCars = [];
+  for (let i = 0; i < inventory.length; i++) {
     if (
       inventory[i].car_make === "Audi" ||
       inventory[i].car_make === "Mercedes-Benz" ||
@@ -320,8 +323,8 @@ function carMaker(num /* code here */) {
   /* code here */
   const odometerReader = {
     odometer: num,
-    drive: function(distance) {
-      const updatedOdometer = odometerReader.odometer + distance;
+    drive(distance) {
+      const updatedOdometer = this.odometer + distance;
       return updatedOdometer;
     }
   };
