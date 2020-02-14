@@ -202,10 +202,10 @@ function getCarInfoById(inventory, num /* code here */) {
  */
 function sortCarInventory(inventory) {
   inventory.sort((a, b) => {
-    if (a.car_model < b.car_model) {
+    if (a.car_model.toLowerCase < b.car_model.toLowerCase) {
       return -1;
     }
-    if (a.car_model > b.car_model) {
+    if (a.car_model.toLowerCase > b.car_model.toLowerCase) {
       return +1;
     }
   });
@@ -243,11 +243,11 @@ function getModelYears(inventory /* code here */) {
  * with a `car_year` which is at most the given desired max year,
  * in the same order as they appear in the original inventory.
  */
-function getOlderCars(inventory, max /* code here */) {
+function getOlderCars(inventory, maxYear /* code here */) {
   /* code here */
   const olderCars = [];
   for (let i = 0; i < inventory.length; i++) {
-    if (inventory[i].car_year <= max) {
+    if (inventory[i].car_year <= maxYear) {
       olderCars.push(inventory[i]);
     }
   }
@@ -324,8 +324,8 @@ function carMaker(num /* code here */) {
   const odometerReader = {
     odometer: num,
     drive(distance) {
-      const updatedOdometer = this.odometer + distance;
-      return updatedOdometer;
+      this.odometer = this.odometer + distance;
+      return this.odometer;
     }
   };
   return odometerReader;
